@@ -1,26 +1,24 @@
 CC=gcc
-
 CFLAGS= -g3
+SRC_DIR=src
+OBJ_DIR=obj
+INCLUDE_DRI=include
+
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+.PHONY: all clean
 
 all: jobCommander jobExecutorServer
 
-jobCommander: jobCommander.o
-	$(CC) $(CFLAGS) -o jobCommander jobCommander.o
+jobCommander: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $<
 
-jobExecutorServer: jobExecutorServer.o list.o list_type.o
-	$(CC) $(CFLAGS) -o jobExecutorServer jobExecutorServer.o list.o list_type.o
+jobExecutorServer: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $<
 
-jobCommander.o:	jobCommander.c
-	$(CC) $(CFLAGS) -c jobCommander.c
-
-jobExecutorServer.o: jobExecutorServer.c
-	$(CC) $(CFLAGS) -c jobExecutorServer.c
-
-list.o:	list.c
-		$(CC) $(CFLAGS) -c list.c
-
-list_type.o: list_type.c
-		$(CC) $(CFLAGS) -c list_type.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+		$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -rf jobCommander jobExecutorServer *.o
+	$(RM) $(OBJ) jobCommander jobExecutorServer

@@ -1,9 +1,8 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <unistd.h>
-#include "list_type.h"
+#include "../include/list_type.h"
 #include <fcntl.h>
-#include <unistd.h>
 
 
 void set_value (process *target, process source)
@@ -11,16 +10,6 @@ void set_value (process *target, process source)
 	int i = 0, j;
 	target->pid = source.pid;
 	target->jobID = source.jobID;
-	/*if (target->command != NULL)
-	{
-		while (target->command[i] != NULL)
-		{
-			memset(target->command[i], 0, strlen(target->command[i]) + 1);
-		//	free(target->command[i]);
-			i++;
-		}
-		free(target->command);
-	}*/
 
 	if (source.command != NULL)
 	{

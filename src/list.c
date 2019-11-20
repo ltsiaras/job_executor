@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include "list.h"
+#include "../include/list.h"
 
 
 info_p LIST_create()

@@ -9,8 +9,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <signal.h>
-#include "list.h"
-
+#include "../include/list.h"
 
 char *fifo = "Server_Fifo";
 int jobID = 0, concurrency = 1;
